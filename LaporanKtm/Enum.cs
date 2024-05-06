@@ -65,9 +65,6 @@ public class AutomataSimulator
         // Implementasikan logika untuk mencari transisi yang sesuai
         // ...
     }
-<<<<<<< Updated upstream
-}
-=======
 
     public void AddTask(string task, State taskState)
     {
@@ -144,4 +141,3 @@ public class AutomataSimulator
     }
 
 }
->>>>>>> Stashed changes
