@@ -11,6 +11,31 @@ public enum State
 
 public enum Trigger { proses, cancel, cari, edit };
 
+public enum hari
+{ 
+    Senin,
+    Selasa,
+    Rabu,
+    Kamis,
+    Jumat,
+    Sabtu,
+}
+
+public enum bulan
+{
+    Januari,
+    Februari,
+    Maret,
+    April,
+    Mei,
+    Juni,
+    July,
+    Agustus,
+    September,
+    Oktober,
+    November,
+    December
+}
 class StateTodo
 {
     public class Transition
