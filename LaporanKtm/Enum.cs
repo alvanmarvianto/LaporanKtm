@@ -67,7 +67,7 @@ class StateTodo
 
         currentState = newState;
     }
-    public void AddTask(string task, State taskState)
+    public void AddTaska(string task, State taskState)
     {
         tasks.Add(task, taskState);
         Console.WriteLine("Tambah task: " + task + " (State: " + taskState + ")");
@@ -82,7 +82,7 @@ class StateTodo
         }
     }
 
-    public void ChangeTaskState(string task, State newState)
+    public void ChangeTaskStatea(string task, State newState)
     {
         if (tasks.ContainsKey(task))
         {
@@ -112,7 +112,7 @@ class StateTodo
         {
             Console.Write("Masukkan nama task ke-" + (i + 1) + ": ");
             string namaTask = Console.ReadLine();
-            AddTask(namaTask, State.Start);
+            AddTaska(namaTask, State.Start);
         }
 
         DisplayTasks();
@@ -193,79 +193,4 @@ class StateTodo
         }
     }
 
-    public void AddTask(string task, State taskState)
-    {
-        tasks.Add(task, taskState);
-        Console.WriteLine("Tambah task: " + task + " (State: " + taskState + ")");
-    }
-
-    public void DisplayTasks()
-    {
-        Console.WriteLine("Daftar task:");
-        foreach (var task in tasks)
-        {
-            Console.WriteLine("- " + task.Key + " (State: " + task.Value + ")");
-        }
-    }
-
-    public void ChangeTaskState(string task, State newState)
-    {
-        if (tasks.ContainsKey(task))
-        {
-            tasks[task] = newState;
-            Console.WriteLine("ktm  task '" + task + "' berhasil diubah menjadi: " + newState);
-        }
-        else
-        {
-            Console.WriteLine("ktm '" + task + "' tidak ditemukan.");
-        }
-    }
-
-    public void Run()
-    {
-        //puri masuk deh
-        Console.WriteLine("Daftar trigger yang tersedia:");
-        foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
-        {
-            Console.WriteLine("- " + trigger);
-        }
-
-        Console.WriteLine();
-        Console.Write("Masukkan jumlah task yang ingin ditambahkan: ");
-        int jumlahTask = int.Parse(Console.ReadLine());
-
-        for (int i = 0; i < jumlahTask; i++)
-        {
-            Console.Write("Masukkan nama task ke-" + (i + 1) + ": ");
-            string namaTask = Console.ReadLine();
-            AddTask(namaTask, State.Start);
-        }
-
-        DisplayTasks();
-
-        Console.Write("Masukkan nama task yang ingin diubah statusnya: ");
-        string taskYangDiubah = Console.ReadLine();
-        Debug.Assert(!string.IsNullOrEmpty(taskYangDiubah), "Nama task tidak boleh kosong");
-
-        Console.WriteLine("Daftar trigger yang tersedia:");
-        foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
-        {
-            Console.WriteLine("- " + trigger);
-        }
-
-        Console.WriteLine();
-        Console.Write("Pilih trigger untuk task '" + taskYangDiubah + "': ");
-        string triggerInput = Console.ReadLine();
-
-        if (Enum.TryParse(triggerInput, out Trigger selectedTrigger))
-        {
-            ActivateTrigger(selectedTrigger);
-            DisplayTasks();
-        }
-        else
-        {
-            Console.WriteLine("Trigger tidak valid.");
-        }
-    }
-
-}
+  }
