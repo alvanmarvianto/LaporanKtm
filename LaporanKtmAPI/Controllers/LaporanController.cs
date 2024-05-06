@@ -1,7 +1,8 @@
 ﻿using System;
 using LaporanKtmAPI.Model;
 using Microsoft.AspNetCore.Mvc;
-using LaporanKtmLibrary.Helper;
+using System.Collections.Generic;
+using LaporanKtmAPI.Services;
 
 namespace LaporanKtmAPI.Controllers
 {
@@ -9,16 +10,21 @@ namespace LaporanKtmAPI.Controllers
     [Route("api/[controller]")]
     public class LaporanController : ControllerBase
     {
-        private static List<Laporan> reportList = new List<Laporan>();
+        private readonly ILaporanService _laporan;
+
+        public LaporanController(ILaporanService laporan)
+        {
+            _laporan = laporan;
+        }
 
         [HttpGet]
         public ActionResult<IEnumerable<Laporan>> Get()
         {
             try
             {
-                return CollectionHelper.GetAll<Laporan>(reportList);
-            }
-            catch (Exception e)
+                List<Laporan> allReport = _laporan.GetAll();
+                return allReport;
+            } catch (Exception e)
             {
                 return StatusCode(500, e.Message);
             }
@@ -29,59 +35,56 @@ namespace LaporanKtmAPI.Controllers
         {
             try
             {
-                return CollectionHelper.GetById<Laporan>(reportList, id);
-            }
-            catch (Exception e)
+                Laporan idLaporan = _laporan.GetById(id);
+                return idLaporan;
+            } catch (Exception e)
             {
-                return NotFound();
+                return StatusCode(500, e.Message);
             }
         }
 
         [HttpPut("{id}")]
-        public ActionResult Update(int id, Laporan laporan)
+        public void Update(int id, Laporan laporan)
         {
             try
             {
-                reportList = CollectionHelper.Update(reportList, laporan, id);
-                return Ok();
+              _laporan.Edit(id, laporan);
+              
             }
             catch (Exception e)
             {
                 if (e is ArgumentOutOfRangeException)
                 {
-                    return NotFound();
+                    NotFound();
                 }
 
-                return StatusCode(500, e.Message);
+                StatusCode(500, e.Message);
             }
         }
 
         [HttpPost]
-        public ActionResult Save(Laporan laporan)
+        public void Save([FromBody] Laporan laporan)
         {
             try
             {
-                reportList = CollectionHelper.Add<Laporan>(reportList, laporan);
-                return Ok();
-
+                 _laporan.Add(laporan);
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
+                StatusCode(500, e.Message);
             }
         }
 
         [HttpDelete("{id}")]
-        public ActionResult Delete(int id)
+        public void Delete(int id)
         {
             try
             {
-                CollectionHelper.Delete<Laporan>(reportList, id);
-                return Ok();
+               _laporan.Delete(id);
             }
             catch (Exception e)
             {
-                return StatusCode(500, e.Message);
+                 StatusCode(500, e.Message);
             }
         }
     }
