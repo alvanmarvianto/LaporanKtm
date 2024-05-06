@@ -14,14 +14,14 @@
                 // Arrange
                 var list = new List<Laporan>
                 {
-                    new Laporan("John", "john@example.com", "123456", State.Start,default),
-                    new Laporan("Alice", "alice@example.com", "234567", State.MembuatLaporan, default),
-                    new Laporan("Bob", "bob@example.com", "345678", State.MengeditLaporan, default),
-                    new Laporan("Eve", "eve@example.com", "456789", State.Ketemu, default)
+                    new Laporan("John", "john@example.com", "1234567890", State.Start,default),
+                    new Laporan("Alice", "alice@example.com", "0987654321", State.MembuatLaporan, default),
+                    new Laporan("Bob", "bob@example.com", "1234560987", State.MengeditLaporan, default),
+                    new Laporan("Eve", "eve@example.com", "0987612345", State.Ketemu, default)
                 };
 
                 // Act
-                int index = Search<Laporan>.ByNim(list, new Laporan("", "", "345678", State.Start, default));
+                int index = Search<Laporan>.ByNim(list, new Laporan("", "", "1234560987", State.Start, default));
 
                 // Assert
                 Assert.AreEqual(2, index);
@@ -33,14 +33,14 @@
                 // Arrange
                 var list = new List<Laporan>
                 {
-                    new Laporan("John", "john@example.com", "123456", State.Start, default),
-                    new Laporan("Alice", "alice@example.com", "234567", State.MembuatLaporan, default),
-                    new Laporan("Bob", "bob@example.com", "345678", State.MengeditLaporan, default),
-                    new Laporan("Eve", "eve@example.com", "456789", State.Ketemu, default)
+                    new Laporan("John", "john@example.com", "1212121212", State.Start,default),
+                    new Laporan("Alice", "alice@example.com", "2323232323", State.MembuatLaporan, default),
+                    new Laporan("Bob", "bob@example.com", "5656565656", State.MengeditLaporan, default),
+                    new Laporan("Eve", "eve@example.com", "7878787878", State.Ketemu, default)
                 };
 
                 // Act
-                int index = Search<Laporan>.ByNim(list, new Laporan("", "", "999999", State.Start, default));
+                int index = Search<Laporan>.ByNim(list, new Laporan("", "", "9999999999", State.Start, default));
 
                 // Assert
                 Assert.AreEqual(-1, index);
@@ -55,10 +55,10 @@
                 var twoDaysAgo = DateOnly.FromDateTime(DateTime.Today.AddDays(-2));
                 var list = new List<Laporan>
                 {
-                    new Laporan("John", "john@example.com", "123456", State.Start, twoDaysAgo),
-                    new Laporan("Alice", "alice@example.com", "234567", State.MembuatLaporan, today),
-                    new Laporan("Bob", "bob@example.com", "345678", State.MengeditLaporan, yesterday),
-                    new Laporan("Eve", "eve@example.com", "456789", State.Ketemu, default)
+                    new Laporan("John", "john@example.com", "1010101010", State.Start, twoDaysAgo),
+                    new Laporan("Alice", "alice@example.com", "4040404040", State.MembuatLaporan, today),
+                    new Laporan("Bob", "bob@example.com", "5757575757", State.MengeditLaporan, yesterday),
+                    new Laporan("Eve", "eve@example.com", "9393939393", State.Ketemu, default)
                 };
 
                 // Act

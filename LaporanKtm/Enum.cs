@@ -12,7 +12,7 @@ public enum State
 
 public enum Trigger { proses, cancel, cari, edit };
 
-class StateTodo
+public class StateTodo
 {
     public class Transition
     {
