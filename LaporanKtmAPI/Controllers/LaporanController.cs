@@ -70,6 +70,20 @@ namespace LaporanKtmAPI.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(int id)
+        {
+            try
+            {
+                CollectionHelper.Delete<Laporan>(reportList, id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
 
