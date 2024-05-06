@@ -23,6 +23,19 @@ namespace LaporanKtmAPI.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpGet("{id}")]
+        public ActionResult<Laporan> Show(int id)
+        {
+            try
+            {
+                return CollectionHelper.GetById<Laporan>(reportList, id);
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
+        }
     }
 }
 
