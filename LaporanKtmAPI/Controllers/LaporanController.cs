@@ -55,6 +55,21 @@ namespace LaporanKtmAPI.Controllers
                 return StatusCode(500, e.Message);
             }
         }
+
+        [HttpPost]
+        public ActionResult Save(Laporan laporan)
+        {
+            try
+            {
+                reportList = CollectionHelper.Add<Laporan>(reportList, laporan);
+                return Ok();
+
+            }
+            catch (Exception e)
+            {
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
 
