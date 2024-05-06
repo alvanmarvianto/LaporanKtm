@@ -118,6 +118,7 @@ public class AutomataSimulator
 
         Console.Write("Masukkan nama task yang ingin diubah statusnya: ");
         string taskYangDiubah = Console.ReadLine();
+        Debug.Assert(!string.IsNullOrEmpty(taskYangDiubah), "Nama task tidak boleh kosong");
 
         Console.WriteLine("Daftar trigger yang tersedia:");
         foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
