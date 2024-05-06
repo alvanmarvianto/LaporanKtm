@@ -10,6 +10,14 @@ namespace LaporanKtmLibrary.Output
 {
     internal class GeneralMenu
     {
+        public struct Laporan
+        {
+            public int Id { get; set; }
+            public string Pelapor { get; set; }
+            public DateTime tanggalLaporan { get; set; }
+        }
+
+        Laporan[] daftarLaporan = new Laporan[5];
 
         public String startPage()
         {
@@ -66,15 +74,8 @@ namespace LaporanKtmLibrary.Output
             }
             else if (x == "1")
             {
-                string nama;
-                string NIM;
-
-                Console.WriteLine("Masukan Nama Pelapor: ");
-                nama = Console.ReadLine();
-
-                Console.WriteLine("Masukan NIM: ");
-                NIM = Console.ReadLine();
-
+                Console.WriteLine("Masukan nama pelapor: ");
+                daftarLaporan[0].Pelapor = Console.ReadLine();
             }
             else if (x == "9")
             {
@@ -101,11 +102,14 @@ namespace LaporanKtmLibrary.Output
             }
             else if (x == "1")
             {
-                // x berupa panjang list laporan yang dibuat
-                for (int i = 0; i < x; i++)
+                int i = 5;
+                while (i != 0) 
                 {
-                    x
+                    Console.WriteLine("Nama: " + daftarLaporan[i].Pelapor);
+                    Console.WriteLine("ID: " + daftarLaporan[i].Id);
+                    Console.WriteLine("Tanggal: " + daftarLaporan[i].tanggalLaporan);
                 }
+                i--;
             }
             else if (x == "9")
             {
@@ -131,12 +135,14 @@ namespace LaporanKtmLibrary.Output
             }
             else if (x == "1")
             {
-                // x berupa panjang list laporan yang dibuat
-                for (int i = 0; i < x; i++)
+                int i = 0;
+                while (i != 5)
                 {
-                    x
+                    Console.WriteLine(i + ". Nama: " + daftarLaporan[i].Pelapor);
+                    Console.WriteLine("ID: " + daftarLaporan[i].Id);
+                    Console.WriteLine("Tanggal: " + daftarLaporan[i].tanggalLaporan);
                 }
-
+                i++;
             }
             else if (x == "9")
             {
