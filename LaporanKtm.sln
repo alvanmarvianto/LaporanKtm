@@ -5,6 +5,12 @@ VisualStudioVersion = 17.9.34607.119
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaporanKtm", "LaporanKtm\LaporanKtm.csproj", "{849CDC3D-CDB8-47B7-A757-6C830A79D8E2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaporanKtmAPI", "LaporanKtmAPI\LaporanKtmAPI.csproj", "{5F133776-2EF5-4B67-9F16-84CCD7E79196}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaporanKtmLibrary", "LaporanKtmLibrary\LaporanKtmLibrary.csproj", "{D73AFB42-A1C3-4812-9277-00485C1A4667}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LaporanKtmTest", "LaporanKtmTest\LaporanKtmTest.csproj", "{4847AE6E-D277-4BE4-A2C1-D8D38912FB49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{849CDC3D-CDB8-47B7-A757-6C830A79D8E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{849CDC3D-CDB8-47B7-A757-6C830A79D8E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{849CDC3D-CDB8-47B7-A757-6C830A79D8E2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F133776-2EF5-4B67-9F16-84CCD7E79196}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F133776-2EF5-4B67-9F16-84CCD7E79196}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F133776-2EF5-4B67-9F16-84CCD7E79196}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F133776-2EF5-4B67-9F16-84CCD7E79196}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D73AFB42-A1C3-4812-9277-00485C1A4667}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D73AFB42-A1C3-4812-9277-00485C1A4667}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D73AFB42-A1C3-4812-9277-00485C1A4667}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D73AFB42-A1C3-4812-9277-00485C1A4667}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4847AE6E-D277-4BE4-A2C1-D8D38912FB49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4847AE6E-D277-4BE4-A2C1-D8D38912FB49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4847AE6E-D277-4BE4-A2C1-D8D38912FB49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4847AE6E-D277-4BE4-A2C1-D8D38912FB49}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
