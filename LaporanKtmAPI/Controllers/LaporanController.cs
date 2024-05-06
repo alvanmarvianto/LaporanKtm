@@ -36,6 +36,25 @@ namespace LaporanKtmAPI.Controllers
                 return NotFound();
             }
         }
+
+        [HttpPut("{id}")]
+        public ActionResult Update(int id, Laporan laporan)
+        {
+            try
+            {
+                reportList = CollectionHelper.Update(reportList, laporan, id);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                if (e is ArgumentOutOfRangeException)
+                {
+                    return NotFound();
+                }
+
+                return StatusCode(500, e.Message);
+            }
+        }
     }
 }
 
