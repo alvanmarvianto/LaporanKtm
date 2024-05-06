@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Utama.Transfer;
 
@@ -55,10 +54,19 @@ class StateTodo
 
     public void ActivateTrigger(Trigger trigger)
     {
-        currentState = GetNextState(currentState, trigger);
-        Console.WriteLine("State Anda adalah: " + currentState);
-    }
+        State newState = GetNextState(currentState, trigger);
+        Console.WriteLine("State Anda adalah: " + newState);
 
+             foreach (var task in tasks.ToList())
+        {
+            if (task.Value == currentState)
+            {
+                tasks[task.Key] = newState;
+            }
+        }
+
+        currentState = newState;
+    }
     public void AddTask(string task, State taskState)
     {
         tasks.Add(task, taskState);
@@ -125,8 +133,7 @@ class StateTodo
         if (Enum.TryParse(triggerInput, out Trigger selectedTrigger))
         {
             ActivateTrigger(selectedTrigger);
-            DisplayTasks();
-
+            DisplayTasks(); // Perbarui tampilan setelah mengaktifkan trigger
             // Periksa apakah tugas selesai (berada dalam status Ketemu), jika iya, panggil metode Bayar()
             if (tasks.ContainsKey(taskYangDiubah) && tasks[taskYangDiubah] == State.Ketemu)
             {
@@ -139,6 +146,7 @@ class StateTodo
             Console.WriteLine("Trigger tidak valid.");
         }
     }
+
     public void Bayar()
     {
         BankTransferConfig config = new BankTransferConfig();
@@ -185,4 +193,3 @@ class StateTodo
         }
     }
 }
-
