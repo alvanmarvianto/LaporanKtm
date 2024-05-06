@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 public enum State
 {
@@ -77,7 +78,7 @@ class StateTodo
         if (tasks.ContainsKey(task))
         {
             tasks[task] = newState;
-            Console.WriteLine("ktm  task '" + task + "' berhasil diubah menjadi: " + newState);
+            Console.WriteLine("ktm   '" + task + "' berhasil diubah menjadi: " + newState);
         }
         else
         {
@@ -96,10 +97,11 @@ class StateTodo
         Console.WriteLine();
         Console.Write("Masukkan jumlah task yang ingin ditambahkan: ");
         int jumlahTask = int.Parse(Console.ReadLine());
+        Debug.Assert(jumlahTask >= 0, "Jumlah guru tidak boleh negatif");
 
         for (int i = 0; i < jumlahTask; i++)
         {
-            Console.Write("Masukkan nama task ke-" + (i + 1) + ": ");
+            Console.Write("Masukkan nama ktm ke-" + (i + 1) + ": ");
             string namaTask = Console.ReadLine();
             AddTask(namaTask, State.Start);
         }
