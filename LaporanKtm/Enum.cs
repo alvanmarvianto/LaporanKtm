@@ -98,11 +98,11 @@ class StateTodo
         Console.WriteLine();
         Console.Write("Masukkan jumlah task yang ingin ditambahkan: ");
         int jumlahTask = int.Parse(Console.ReadLine());
-        Debug.Assert(jumlahTask >= 0, "Jumlah guru tidak boleh negatif");
+        Debug.Assert(jumlahTask >= 0, "Jumlah task tidak boleh negatif");
 
         for (int i = 0; i < jumlahTask; i++)
         {
-            Console.Write("Masukkan nama ktm ke-" + (i + 1) + ": ");
+            Console.Write("Masukkan nama task ke-" + (i + 1) + ": ");
             string namaTask = Console.ReadLine();
             AddTask(namaTask, State.Start);
         }
@@ -126,14 +126,19 @@ class StateTodo
         {
             ActivateTrigger(selectedTrigger);
             DisplayTasks();
+
+            // Periksa apakah tugas selesai (berada dalam status Ketemu), jika iya, panggil metode Bayar()
+            if (tasks.ContainsKey(taskYangDiubah) && tasks[taskYangDiubah] == State.Ketemu)
+            {
+                Console.WriteLine("Tugas selesai.");
+                Bayar();
+            }
         }
         else
         {
             Console.WriteLine("Trigger tidak valid.");
         }
     }
-
-
     public void Bayar()
     {
         BankTransferConfig config = new BankTransferConfig();
