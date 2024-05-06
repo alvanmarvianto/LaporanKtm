@@ -19,88 +19,93 @@ namespace LaporanKtmLibrary.Output
 
         Laporan[] daftarLaporan = new Laporan[5];
 
-        public String startPage()
+        public void startPage()
         {
-            string x;
+            int x;
             Console.WriteLine("===== Layanan Pengaduan Kehilangan KTM =====");
             Console.WriteLine(" ");
             Console.WriteLine(" 1. Create Laporan Baru");
             Console.WriteLine(" 2. Lihat Laporan Aktif");
             Console.WriteLine(" 3. Ubah Laporan Aktif");
+            Console.WriteLine(" 4. Search Laporan");
             Console.WriteLine(" 9. Exit");
             Console.WriteLine(" ");
 
             Console.WriteLine("Masukan: ");
-            x = Console.ReadLine();
+            x = Convert.ToInt32(Console.ReadLine());
 
-            if (x != "1" || x != "2" || x != "3" || x != "9")
+            if (x < 0 || x > 9)
             {
-                return "Masukan angka valid!";
+                Console.WriteLine("Masukan angka valid!");
             }
-            else if (x == "1")
+            else if (x == 1)
             {
                 createPage();
             }
-            else if (x == "2")
+            else if (x == 2)
             {
                 lihatPage();
             }
-            else if (x == "3")
+            else if (x == 3)
             {
                 editPage();
             }
-            else if (x == "9")
+            else if (x == 4) 
+            { 
+                
+            }
+            else if (x == 9)
             {
-                return "end";
+                Console.WriteLine("end");
             }
 
-            return "end";
+            Console.WriteLine("end");
 
         }
 
-        public String createPage()
+        public void createPage()
         {
-            string x;
+            int x;
             Console.WriteLine("===== Create Laporan Baru =====");
             Console.WriteLine(" 1. Masukan Data Pelaporan");
             Console.WriteLine(" 9. Exit");
 
             Console.WriteLine("Masukan: ");
-            x = Console.ReadLine();
+            x = Convert.ToInt32(Console.ReadLine());
 
-            if (x != "1" || x != "9")
+            if (x != 1 || x != 9)
             {
-                return "Masukan angka valid!";
+                Console.WriteLine("Masukan angka valid!");
             }
-            else if (x == "1")
+            else if (x == 1)
             {
                 Console.WriteLine("Masukan nama pelapor: ");
                 daftarLaporan[0].Pelapor = Console.ReadLine();
             }
-            else if (x == "9")
+            else if (x == 9)
             {
-                return startPage();
+                startPage();
             }
 
-            return "end";
+            Console.WriteLine("end");
 
         }
 
-        public String lihatPage()
+        public void lihatPage()
         {
-            string x;
+            int x;
             Console.WriteLine("===== Show Laporan Baru =====");
             Console.WriteLine(" 1. Tampilkan List Laporan");
             Console.WriteLine(" 9. Exit");
 
             Console.WriteLine("Masukan: ");
-            x = Console.ReadLine();
+            x = Convert.ToInt32(Console.ReadLine());
 
-            if (x != "1" || x != "9")
+            if (x != 1 || x != 9)
             {
-                return "Masukan angka valid!";
+                Console.WriteLine("Masukan angka valid!");
             }
-            else if (x == "1")
+            else if (x == 1)
             {
                 int i = 5;
                 while (i != 0) 
@@ -111,29 +116,29 @@ namespace LaporanKtmLibrary.Output
                 }
                 i--;
             }
-            else if (x == "9")
+            else if (x == 9)
             {
-                return startPage();
+                startPage();
             }
 
-            return "end";
+            Console.WriteLine("end");
         }
 
-        public String editPage()
+        public void editPage()
         {
-            string x;
+            int x;
             Console.WriteLine("===== Edit Laporan Baru =====");
             Console.WriteLine(" 1. List Laporan yang dapat diubah");
             Console.WriteLine(" 9. Exit");
 
             Console.WriteLine("Masukan: ");
-            x = Console.ReadLine();
+            x = Convert.ToInt32(Console.ReadLine());
 
-            if (x != "1" || x != "9")
+            if (x != 1 || x != 9)
             {
-                return "Masukan angka valid!";
+                Console.WriteLine("Masukan angka valid!");
             }
-            else if (x == "1")
+            else if (x == 1)
             {
                 int i = 0;
                 while (i != 5)
@@ -144,18 +149,27 @@ namespace LaporanKtmLibrary.Output
                 }
                 i++;
             }
-            else if (x == "9")
+            else if (x == 9)
             {
-                return startPage();
+                startPage();
             }
 
-            return "end";
+            Console.WriteLine("end");
 
         }
 
-        public string endPage()
+        public void search() 
         {
-            return "======== Terima Kasih Sudah Melapor! ========";
+            string nim;
+            Console.WriteLine("Masukan NIM yang dicari: ");
+            nim = Console.ReadLine();
+
+            while( nim )
+        }
+
+        public void endPage()
+        {
+            Console.WriteLine("======== Terima Kasih Sudah Melapor! ========");
         }
     }
 }
