@@ -20,5 +20,8 @@
     <ProjectReference Include="..\LaporanKtm\LaporanKtm.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
+    <ProjectReference Include="..\LaporanKtmLibrary\LaporanKtmLibrary.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>
