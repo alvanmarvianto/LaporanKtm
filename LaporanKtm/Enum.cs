@@ -67,13 +67,13 @@ public class StateTodo
 
         currentState = newState;
     }
-    public void AddTask(string task, State taskState)
+    public void AddTaska(string task, State taskState)
     {
         tasks.Add(task, taskState);
         Console.WriteLine("Tambah task: " + task + " (State: " + taskState + ")");
     }
 
-    public void DisplayTasks()
+    public void DisplayTasksa()
     {
         Console.WriteLine("Daftar task:");
         foreach (var task in tasks)
@@ -95,7 +95,7 @@ public class StateTodo
         }
     }
 
-    public void Run()
+    public void Runa()
     {
         Console.WriteLine("Daftar trigger yang tersedia:");
         foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
@@ -112,10 +112,10 @@ public class StateTodo
         {
             Console.Write("Masukkan nama task ke-" + (i + 1) + ": ");
             string namaTask = Console.ReadLine();
-            AddTask(namaTask, State.Start);
+            AddTaska(namaTask, State.Start);
         }
 
-        DisplayTasks();
+        DisplayTasksa();
 
         Console.Write("Masukkan nama task yang ingin diubah statusnya: ");
         string taskYangDiubah = Console.ReadLine();
