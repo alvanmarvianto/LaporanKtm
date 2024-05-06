@@ -7,6 +7,6 @@ class Program
     {
         StateTodo Ktm = new StateTodo();
 
-        Ktm.Run();
+        Ktm.Runa();
     }
 }

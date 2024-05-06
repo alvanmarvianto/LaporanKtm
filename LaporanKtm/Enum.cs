@@ -133,7 +133,7 @@ public class StateTodo
         if (Enum.TryParse(triggerInput, out Trigger selectedTrigger))
         {
             ActivateTrigger(selectedTrigger);
-            DisplayTasks(); // Perbarui tampilan setelah mengaktifkan trigger
+            DisplayTasksa(); // Perbarui tampilan setelah mengaktifkan trigger
             // Periksa apakah tugas selesai (berada dalam status Ketemu), jika iya, panggil metode Bayar()
             if (tasks.ContainsKey(taskYangDiubah) && tasks[taskYangDiubah] == State.Ketemu)
             {
