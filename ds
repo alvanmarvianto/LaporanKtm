@@ -1,0 +1,115 @@
+[33mcommit a74eb7a8fcedddd74ee3428b69054b9a46f07537[m[33m ([m[1;36mHEAD -> [m[1;32m1302223074_alvan[m[33m)[m
+Merge: 509d0a0 9acd7e3
+Author: Alvan <alvanmarvianto@gmail.com>
+Date:   Mon May 6 23:18:40 2024 +0700
+
+    Merge branch 'feature/yazid' of https://github.com/alvanmarvianto/LaporanKtm into 1302223074_alvan
+
+[33mcommit 509d0a084223a4fa8c9d196788a0fd6ebea45e14[m
+Merge: c40ad5e cd66ecb
+Author: Alvan <alvanmarvianto@gmail.com>
+Date:   Mon May 6 23:17:57 2024 +0700
+
+    Merge branch 'master' of https://github.com/alvanmarvianto/LaporanKtm into 1302223074_alvan
+
+[33mcommit c40ad5e46f5b208d7fe87d6121bf96c7d36c53da[m
+Author: Alvan <alvanmarvianto@gmail.com>
+Date:   Mon May 6 23:17:41 2024 +0700
+
+    add sln
+
+[33mcommit 9acd7e3472a773c48354b217e093bc248742e3d2[m[33m ([m[1;31morigin/feature/yazid[m[33m)[m
+Author: yazidalg <yazid.al2418@gmail.com>
+Date:   Mon May 6 23:12:15 2024 +0700
+
+    delete action
+
+[33mcommit b8b17bfc93c48fd128a8c5568e1a981032007427[m
+Author: yazidalg <yazid.al2418@gmail.com>
+Date:   Mon May 6 23:11:46 2024 +0700
+
+    save action
+
+[33mcommit ed1901d46e5e3169390782470ef1009f7f35a7d3[m
+Author: yazidalg <yazid.al2418@gmail.com>
+Date:   Mon May 6 23:10:52 2024 +0700
+
+    update action
+
+[33mcommit f6579877514338a6a319587bb0ba79e5733fef82[m
+Author: yazidalg <yazid.al2418@gmail.com>
+Date:   Mon May 6 23:09:38 2024 +0700
+
+    get by id action
+
+[33mcommit 215b5030edc705ded216b62545a3e323ee94d299[m
+Author: yazidalg <yazid.al2418@gmail.com>
+Date:   Mon May 6 23:09:01 2024 +0700
+
+    reference between project
+
+[33mcommit d083f9fdb40b1abbc5543fd3545629e590a423a4[m
+Author: yazidalg <yazid.al2418@gmail.com>
+Date:   Mon May 6 23:08:08 2024 +0700
+
+    get action
+
+[33mcommit 284bc20dd1aa7baf5a505be28cc27a55275977ae[m
+Author: yazidalg <yazid.al2418@gmail.com>
+Date:   Mon May 6 23:06:35 2024 +0700
+
+    add helper for doing an action in crud
+
+[33mcommit 7e0e8068e8d059559ef02a4cd4d3ebc76af2056c[m
+Author: yazidalg <yazid.al2418@gmail.com>
+Date:   Mon May 6 23:04:06 2024 +0700
+
+    add report models
+
+[33mcommit cd66ecbfda5645c0e6e3205056c6e3bcee1ccbaf[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/1302220143_Jeremy[m[33m, [m[1;32mmaster[m[33m)[m
+Merge: b06b44b 992221d
+Author: fharlup <35958282+fharlup@users.noreply.github.com>
+Date:   Mon May 6 22:56:20 2024 +0700
+
+    Merge pull request #2 from alvanmarvianto/fajar_1302223032
+    
+    statebase
+
+[33mcommit 992221d86334bf986aa09b8e770c84379472b6a2[m
+Author: fharlup <35958282+fharlup@users.noreply.github.com>
+Date:   Mon May 6 22:55:52 2024 +0700
+
+    statebase
+
+[33mcommit b06b44bccc2caa380e8c09bf40549a95368176a2[m
+Merge: 22b224d 89b48d8
+Author: purianagatha <121429021+purianagatha@users.noreply.github.com>
+Date:   Mon May 6 22:52:00 2024 +0700
+
+    Merge pull request #1 from alvanmarvianto/1302223019_Puri
+    
+    first commit
+
+[33mcommit 89b48d84e8492f8f7f4a3e622d83dd4fde9d1e7f[m[33m ([m[1;31morigin/1302223019_Puri[m[33m)[m
+Author: purianagatha <purianagatha@gmail.com>
+Date:   Mon May 6 22:51:28 2024 +0700
+
+    first commit
+
+[33mcommit 433eca24a623b6af39c32f32f2b8c72fb00593ed[m[33m ([m[1;31morigin/1302223074_alvan[m[33m)[m
+Author: Alvan <alvanmarvianto@gmail.com>
+Date:   Mon May 6 22:49:44 2024 +0700
+
+    Menambah search, sort, dan output Date
+
+[33mcommit 89d85164d86559adfa40f39940fa82fc4fc57604[m
+Author: Alvan <alvanmarvianto@gmail.com>
+Date:   Mon May 6 22:44:15 2024 +0700
+
+    insialisasi branch
+
+[33mcommit 22b224d3bd24c2d8624ce50aac1ab9fdb801d522[m
+Author: Alvan <alvanmarvianto@gmail.com>
+Date:   Mon May 6 22:40:06 2024 +0700
+
+    Commit pertama
