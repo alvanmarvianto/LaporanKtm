@@ -2,7 +2,7 @@
 
 namespace LaporanKtmAPI.Model
 {
-    public class Laporan
+    public class Laporan : IComparable<Laporan>
     {
         public string Name { get; set; }
         public string EmailSSO { get; set; }
@@ -14,6 +14,10 @@ namespace LaporanKtmAPI.Model
             EmailSSO = emailSSO;
             Nim = nim;
             Status = status;
+        }
+        public int CompareTo(Laporan other)
+        {
+            return string.Compare(Nim, other.Nim);
         }
     }
 }

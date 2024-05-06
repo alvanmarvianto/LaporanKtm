@@ -2,26 +2,27 @@
 {
     public static class Search<T> where T : IComparable<T>
     {
-        public static int ByNIM(List<T> sortedList, int nim, Func<T, int> nimSelector)
+        public static int ByNim(List<T> list, T item)
         {
-            int left = 0;
-            int right = sortedList.Count - 1;
+            int min = 0;
+            int max = list.Count - 1;
 
-            while (left <= right)
+            while (min <= max)
             {
-                int mid = left + (right - left) / 2;
+                int mid = (min + max) / 2;
+                int comparisonResult = item.CompareTo(list[mid]);
 
-                if (nimSelector(sortedList[mid]) == nim)
+                if (comparisonResult == 0)
                 {
-                    return mid;
+                    return mid; 
                 }
-                else if (nimSelector(sortedList[mid]) < nim)
+                else if (comparisonResult < 0)
                 {
-                    left = mid + 1; 
+                    max = mid - 1;
                 }
                 else
                 {
-                    right = mid - 1; 
+                    min = mid + 1;
                 }
             }
 
