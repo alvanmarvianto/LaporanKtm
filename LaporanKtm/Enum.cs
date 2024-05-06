@@ -19,6 +19,7 @@ public enum hari
     Kamis,
     Jumat,
     Sabtu,
+    minggu
 }
 
 public enum bulan
