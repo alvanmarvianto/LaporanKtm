@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Helper\" />
+    <ProjectReference Include="..\LaporanKtmAPI\LaporanKtmAPI.csproj" />
+    <ProjectReference Include="..\LaporanKtmTest\LaporanKtmTest.csproj" />
+    <ProjectReference Include="..\LaporanKtm\LaporanKtm.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helper\" />
-  </ItemGroup>
+
 </Project>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
 using Utama.Transfer;
+namespace statebase;
 
 public enum State
 {
@@ -57,11 +58,11 @@ public class StateTodo
         State newState = GetNextState(currentState, trigger);
         Console.WriteLine("State Anda adalah: " + newState);
 
-             foreach (var task in tasks.ToList())
+             foreach (var ktm in tasks.ToList())
         {
-            if (task.Value == currentState)
+            if (ktm.Value == currentState)
             {
-                tasks[task.Key] = newState;
+                tasks[ktm.Key] = newState;
             }
         }
 
