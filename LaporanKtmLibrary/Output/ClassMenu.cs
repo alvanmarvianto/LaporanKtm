@@ -5,20 +5,12 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using LaporanKtmAPI;
 
 namespace LaporanKtmLibrary.Output
 {
     internal class GeneralMenu
     {
-        public struct Laporan
-        {
-            public int Id { get; set; }
-            public string Pelapor { get; set; }
-            public DateTime tanggalLaporan { get; set; }
-        }
-
-        Laporan[] daftarLaporan = new Laporan[5];
-
         public void startPage()
         {
             int x;
