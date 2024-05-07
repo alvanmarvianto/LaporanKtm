@@ -161,7 +161,7 @@ class StateTodo
         BankTransferConfig config = new BankTransferConfig();
         Console.WriteLine("en/id:");
 
-        Console.WriteLine("bayar");
+        
         string Bahasa = Console.ReadLine();
 
         string langPrompt = Bahasa == "en" ? "Please insert the amount of money to transfer:" : "Masukkan jumlah uang yang akan di-transfer:";
