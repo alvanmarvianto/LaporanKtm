@@ -164,7 +164,6 @@ namespace LaporanKtmLibrary.Output
             Console.WriteLine("Masukan NIM yang dicari: ");
             nim = Console.ReadLine();
 
-            while( nim )
         }
 
         public void endPage()

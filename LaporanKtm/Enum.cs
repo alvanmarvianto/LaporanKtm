@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using Utama.Transfer;
 namespace statebase;
+
 public enum State
 {
     Start,
