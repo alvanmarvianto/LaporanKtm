@@ -1,72 +1,73 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+using Utama.Transfer;
 
-// Mendefinisikan state dalam automata
 public enum State
 {
     Start,
     MembuatLaporan,
     MengeditLaporan,
-    MencariLaporan,
-    MembacaLaporan
-}
-public enum Trigger { proses, cancel };
-
-// Mendefinisikan transisi dalam automata
-class Transition
-{
-    public State FromState { get; set; }
-    public State ToState { get; set; }
-    public State FinalState { get; set; }
-    public string Input { get; set; }
+    Ketemu
 }
 
-// Mensimulasikan alur interaksi dalam aplikasi
-public class AutomataSimulator
+public enum Trigger { proses, cancel, cari, edit };
+
+public class StateTodo
 {
-    private State currentState;
-
-    public AutomataSimulator()
+    public class Transition
     {
-        currentState = State.Start;
-    }
+        public State StateAwal;
+        public State StateAkhir;
+        public Trigger Trigger;
 
-    public void ProcessInput(string input)
-    {
-        // Mencari transisi yang sesuai dengan state dan input saat ini
-        Transition transition = FindTransition(currentState, input);
-
-        if (transition != null)
+        public Transition(State stateAwal, State stateAkhir, Trigger trigger)
         {
-            // Memperbarui state
-            currentState = transition.ToState;
-
-            // Melakukan tindakan berdasarkan state baru
-            switch (currentState)
-            {
-                case State.MembuatLaporan:
-                    // Tampilkan formulir untuk membuat laporan
-                    break;
-                case State.MengeditLaporan:
-                    // Tampilkan formulir untuk mengedit laporan
-                    break;
-                case State.MencariLaporan:
-                    // Tampilkan formulir untuk mencari laporan
-                    break;
-                case State.MembacaLaporan:
-                    // Tampilkan laporan yang dipilih
-                    break;
-            }
+            this.StateAwal = stateAwal;
+            this.StateAkhir = stateAkhir;
+            this.Trigger = trigger;
         }
     }
 
-    private Transition FindTransition(State currentState, string input)
+    Transition[] transisi =
     {
-        // Implementasikan logika untuk mencari transisi yang sesuai
-        // ...
+        new Transition(State.Start, State.MembuatLaporan, Trigger.proses),
+        new Transition(State.MembuatLaporan, State.Ketemu, Trigger.cari),
+        new Transition(State.MembuatLaporan, State.Start, Trigger.cancel),
+        new Transition(State.MembuatLaporan, State.MengeditLaporan, Trigger.edit),
+        new Transition(State.MengeditLaporan, State.MembuatLaporan, Trigger.proses)
+    };
+
+    public State currentState = State.Start;
+    public Dictionary<string, State> tasks = new Dictionary<string, State>();
+
+    public State GetNextState(State stateAwal, Trigger trigger)
+    {
+        foreach (Transition perubahan in transisi)
+        {
+            if (stateAwal == perubahan.StateAwal && trigger == perubahan.Trigger)
+            {
+                return perubahan.StateAkhir;
+            }
+        }
+        return stateAwal;
     }
 
-    public void AddTask(string task, State taskState)
+    public void ActivateTrigger(Trigger trigger)
+    {
+        State newState = GetNextState(currentState, trigger);
+        Console.WriteLine("State Anda adalah: " + newState);
+
+             foreach (var task in tasks.ToList())
+        {
+            if (task.Value == currentState)
+            {
+                tasks[task.Key] = newState;
+            }
+        }
+
+        currentState = newState;
+    }
+    public void AddTaska(string task, State taskState)
     {
         tasks.Add(task, taskState);
         Console.WriteLine("Tambah task: " + task + " (State: " + taskState + ")");
@@ -81,12 +82,12 @@ public class AutomataSimulator
         }
     }
 
-    public void ChangeTaskState(string task, State newState)
+    public void ChangeTaskStatea(string task, State newState)
     {
         if (tasks.ContainsKey(task))
         {
             tasks[task] = newState;
-            Console.WriteLine("ktm  task '" + task + "' berhasil diubah menjadi: " + newState);
+            Console.WriteLine("ktm   '" + task + "' berhasil diubah menjadi: " + newState);
         }
         else
         {
@@ -96,7 +97,6 @@ public class AutomataSimulator
 
     public void Run()
     {
-        //puri masuk deh
         Console.WriteLine("Daftar trigger yang tersedia:");
         foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
         {
@@ -106,19 +106,19 @@ public class AutomataSimulator
         Console.WriteLine();
         Console.Write("Masukkan jumlah task yang ingin ditambahkan: ");
         int jumlahTask = int.Parse(Console.ReadLine());
+        Debug.Assert(jumlahTask >= 0, "Jumlah task tidak boleh negatif");
 
         for (int i = 0; i < jumlahTask; i++)
         {
             Console.Write("Masukkan nama task ke-" + (i + 1) + ": ");
             string namaTask = Console.ReadLine();
-            AddTask(namaTask, State.Start);
+            AddTaska(namaTask, State.Start);
         }
 
         DisplayTasks();
 
         Console.Write("Masukkan nama task yang ingin diubah statusnya: ");
         string taskYangDiubah = Console.ReadLine();
-        Debug.Assert(!string.IsNullOrEmpty(taskYangDiubah), "Nama task tidak boleh kosong");
 
         Console.WriteLine("Daftar trigger yang tersedia:");
         foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
@@ -133,7 +133,13 @@ public class AutomataSimulator
         if (Enum.TryParse(triggerInput, out Trigger selectedTrigger))
         {
             ActivateTrigger(selectedTrigger);
-            DisplayTasks();
+            DisplayTasks(); // Perbarui tampilan setelah mengaktifkan trigger
+            // Periksa apakah tugas selesai (berada dalam status Ketemu), jika iya, panggil metode Bayar()
+            if (tasks.ContainsKey(taskYangDiubah) && tasks[taskYangDiubah] == State.Ketemu)
+            {
+                Console.WriteLine("Tugas selesai.");
+                Bayar();
+            }
         }
         else
         {
@@ -141,4 +147,49 @@ public class AutomataSimulator
         }
     }
 
+    public void Bayar()
+    {
+        BankTransferConfig config = new BankTransferConfig();
+        Console.WriteLine("en/id:");
+
+        Console.WriteLine("bayar");
+        string Bahasa = Console.ReadLine();
+
+        string langPrompt = Bahasa == "en" ? "Please insert the amount of money to transfer:" : "Masukkan jumlah uang yang akan di-transfer:";
+        Console.WriteLine(langPrompt);
+        int amount = int.Parse(Console.ReadLine());
+
+        int totalAmount = amount;
+
+        string feeOutput = Bahasa == "en" ? "Transfer fee = " : "Biaya transfer = ";
+        string totalOutput = Bahasa == "en" ? "Total amount = " : "Total biaya = ";
+        Console.WriteLine($"{totalOutput} {totalAmount}");
+
+        string methodPrompt = Bahasa == "en" ? "Select transfer method:" : "Pilih metode transfer:";
+        Console.WriteLine(methodPrompt);
+        for (int i = 0; i < config.Methods.Length; i++)
+        {
+            Console.WriteLine($"{i + 1}. {config.Methods[i]}");
+        }
+
+        Console.Write("Select transfer method number: ");
+        int selectedMethodIndex = int.Parse(Console.ReadLine());
+
+        Console.WriteLine($"Selected transfer method: {config.Methods[selectedMethodIndex - 1]}");
+
+        string confirmationPrompt = Bahasa == "en" ? $"Please type \"{config.Confirmation.En}\" to confirm the transaction:" : $"Ketik \"{config.Confirmation.Id}\" untuk mengkonfirmasi transaksi:";
+        Console.WriteLine(confirmationPrompt);
+        string confirmation = Console.ReadLine();
+
+        string successMessage = Bahasa == "en" ? "The transfer is completed" : "Proses transfer berhasil";
+        string failureMessage = Bahasa == "en" ? "Transfer is cancelled" : "Transfer dibatalkan";
+        if (confirmation == config.Confirmation.En || confirmation == config.Confirmation.Id)
+        {
+            Console.WriteLine(successMessage);
+        }
+        else
+        {
+            Console.WriteLine(failureMessage);
+        }
+    }
 }
