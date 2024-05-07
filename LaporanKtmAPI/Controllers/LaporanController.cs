@@ -1,7 +1,6 @@
 ﻿using System;
 using LaporanKtmAPI.Model;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
 using LaporanKtmAPI.Services;
 
 namespace LaporanKtmAPI.Controllers
@@ -18,12 +17,12 @@ namespace LaporanKtmAPI.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<Laporan>> Get()
+        public IActionResult Get()
         {
             try
             {
                 List<Laporan> allReport = _laporan.GetAll();
-                return allReport;
+                return Ok(allReport);
             } catch (Exception e)
             {
                 return StatusCode(500, e.Message);
@@ -63,15 +62,16 @@ namespace LaporanKtmAPI.Controllers
         }
 
         [HttpPost]
-        public void Save([FromBody] Laporan laporan)
+        public ActionResult<List<Laporan>> Save(Laporan laporan)
         {
             try
             {
-                 _laporan.Add(laporan);
+                var result = _laporan.Add(laporan);
+                return Ok(result);
             }
             catch (Exception e)
             {
-                StatusCode(500, e.Message);
+                return StatusCode(500, e.Message);
             }
         }
 

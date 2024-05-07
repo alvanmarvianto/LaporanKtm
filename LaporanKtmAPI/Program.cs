@@ -2,6 +2,7 @@ using LaporanKtmAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ILaporanService, LaporanService>();
+builder.Services.AddScoped<ILaporanService, LaporanService>();
 builder.Services.AddControllersWithViews();
 
 // Add services to the container.
