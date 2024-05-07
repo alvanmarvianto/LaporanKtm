@@ -67,7 +67,7 @@ public class StateTodo
 
         currentState = newState;
     }
-    public void AddTask(string task, State taskState)
+    public void AddTaska(string task, State taskState)
     {
         tasks.Add(task, taskState);
         Console.WriteLine("Tambah task: " + task + " (State: " + taskState + ")");
@@ -82,7 +82,7 @@ public class StateTodo
         }
     }
 
-    public void ChangeTaskState(string task, State newState)
+    public void ChangeTaskStatea(string task, State newState)
     {
         if (tasks.ContainsKey(task))
         {
@@ -112,7 +112,7 @@ public class StateTodo
         {
             Console.Write("Masukkan nama task ke-" + (i + 1) + ": ");
             string namaTask = Console.ReadLine();
-            AddTask(namaTask, State.Start);
+            AddTaska(namaTask, State.Start);
         }
 
         DisplayTasks();
@@ -192,5 +192,4 @@ public class StateTodo
             Console.WriteLine(failureMessage);
         }
     }
-
 }
