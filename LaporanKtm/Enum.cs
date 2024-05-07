@@ -117,36 +117,45 @@ public class StateTodo
 
         DisplayTasks();
 
-        Console.Write("Masukkan nama task yang ingin diubah statusnya: ");
-        string taskYangDiubah = Console.ReadLine();
-
-        Console.WriteLine("Daftar trigger yang tersedia:");
-        foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
+        do
         {
-            Console.WriteLine("- " + trigger);
-        }
+            Console.Write("Masukkan nama task yang ingin diubah statusnya atau ketik 'stop' untuk menghentikan: ");
+            string taskYangDiubah = Console.ReadLine();
 
-        Console.WriteLine();
-        Console.Write("Pilih trigger untuk task '" + taskYangDiubah + "': ");
-        string triggerInput = Console.ReadLine();
-
-        if (Enum.TryParse(triggerInput, out Trigger selectedTrigger))
-        {
-            ActivateTrigger(selectedTrigger);
-            DisplayTasks(); // Perbarui tampilan setelah mengaktifkan trigger
-            // Periksa apakah tugas selesai (berada dalam status Ketemu), jika iya, panggil metode Bayar()
-            if (tasks.ContainsKey(taskYangDiubah) && tasks[taskYangDiubah] == State.Ketemu)
+            if (taskYangDiubah.ToLower() == "stop")
             {
-                Console.WriteLine("Tugas selesai.");
-                Bayar();
+                break; // Menghentikan loop jika pengguna memasukkan "stop"
             }
-        }
-        else
-        {
-            Console.WriteLine("Trigger tidak valid.");
-        }
-    }
 
+            Console.WriteLine("Daftar trigger yang tersedia:");
+            foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
+            {
+                Console.WriteLine("- " + trigger);
+            }
+
+            Console.WriteLine();
+
+            Console.Write("Pilih trigger untuk task '" + taskYangDiubah + "': ");
+            string triggerInput = Console.ReadLine();
+
+            if (Enum.TryParse(triggerInput, out Trigger selectedTrigger))
+            {
+                ActivateTrigger(selectedTrigger);
+                DisplayTasks(); // Perbarui tampilan setelah mengaktifkan trigger
+                                // Periksa apakah tugas selesai (berada dalam status Ketemu), jika iya, panggil metode Bayar()
+                if (tasks.ContainsKey(taskYangDiubah) && tasks[taskYangDiubah] == State.Ketemu)
+                {
+                    Console.WriteLine("Tugas selesai.");
+                    Bayar();
+                }
+            }
+            else
+            {
+                Console.WriteLine("Trigger tidak valid.");
+            }
+
+        } while (true);
+    }
     public void Bayar()
     {
         BankTransferConfig config = new BankTransferConfig();
