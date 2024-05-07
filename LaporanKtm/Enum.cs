@@ -12,32 +12,54 @@ public enum State
 public enum Trigger { proses, cancel, cari, edit };
 
 public enum hari
+<<<<<<< Updated upstream
 { 
+=======
+{
+>>>>>>> Stashed changes
     Senin,
     Selasa,
     Rabu,
     Kamis,
     Jumat,
     Sabtu,
+<<<<<<< Updated upstream
     minggu
+=======
+    Minggu
+>>>>>>> Stashed changes
 }
 
 public enum bulan
 {
     Januari,
     Februari,
+<<<<<<< Updated upstream
     Maret,
     April,
     Mei,
     Juni,
     July,
+=======
+    Maret, 
+    April,
+    Mei,
+    Juni,
+    Juli,
+>>>>>>> Stashed changes
     Agustus,
     September,
     Oktober,
     November,
+<<<<<<< Updated upstream
     December
 }
 class StateTodo
+=======
+    Desember
+}
+public class StateTodo
+>>>>>>> Stashed changes
 {
     public class Transition
     {
