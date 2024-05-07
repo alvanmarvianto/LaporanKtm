@@ -1,4 +1,6 @@
-﻿namespace LaporanKtmLibrary.Common
+﻿using System.Diagnostics;
+
+namespace LaporanKtmLibrary.Common
 {
     public static class Search<T> where T : IComparable<T>
     {
@@ -6,6 +8,7 @@
         {
             int min = 0;
             int max = list.Count - 1;
+            bool NotFound = true;
 
             while (min <= max)
             {
@@ -25,7 +28,7 @@
                     min = mid + 1;
                 }
             }
-
+            Debug.Assert(NotFound, "Data tidak ada dalam list");
             return -1;
         }
     }
