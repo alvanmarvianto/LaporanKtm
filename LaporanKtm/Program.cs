@@ -6,7 +6,8 @@ class Program
     static void Main()
     {
         StateTodo Ktm = new StateTodo();
-
         Ktm.Run();
+
+        Ktm.Bayar();
     }
 }
