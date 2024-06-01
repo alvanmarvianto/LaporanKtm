@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace LaporanKtmAPI.Model
 {
-    public class Laporan
+    public class Laporan : IComparable<Laporan>
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -13,11 +14,17 @@ namespace LaporanKtmAPI.Model
         public Laporan(int id, string name, string emailSSO, string nim, State status, DateOnly date)
         {
             Id = id;
+            Debug.Assert(nim.Length == 10, "Panjang NIM tidak sesuai");
+            Debug.Assert(name.Length < 20, "Nama terlalu panjang");
             Name = name;
             EmailSSO = emailSSO;
             Nim = nim;
             Status = status;
             Date = date;
+        }
+        public int CompareTo(Laporan other)
+        {
+            return string.Compare(Nim, other.Nim);
         }
     }
 }
