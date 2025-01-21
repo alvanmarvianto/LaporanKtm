@@ -1,195 +1,83 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Utama.Transfer;
-namespace statebase;
-public enum State
+using System;
+
+namespace statebase
 {
-    Start,
-    MembuatLaporan,
-    MengeditLaporan,
-    Ketemu
-}
-
-public enum Trigger { proses, cancel, cari, edit };
-
-public class StateTodo
-{
-    public class Transition
+    public enum State
     {
-        public State StateAwal;
-        public State StateAkhir;
-        public Trigger Trigger;
-
-        public Transition(State stateAwal, State stateAkhir, Trigger trigger)
-        {
-            this.StateAwal = stateAwal;
-            this.StateAkhir = stateAkhir;
-            this.Trigger = trigger;
-        }
+        Start,
+        MembuatLaporan,
+        MengeditLaporan,
+        Ketemu
     }
 
-    Transition[] transisi =
-    {
-        new Transition(State.Start, State.MembuatLaporan, Trigger.proses),
-        new Transition(State.MembuatLaporan, State.Ketemu, Trigger.cari),
-        new Transition(State.MembuatLaporan, State.Start, Trigger.cancel),
-        new Transition(State.MembuatLaporan, State.MengeditLaporan, Trigger.edit),
-        new Transition(State.MengeditLaporan, State.MembuatLaporan, Trigger.proses)
-    };
+    public enum Trigger { proses, cancel, cari, edit };
 
-    public State currentState = State.Start;
-    public Dictionary<string, State> tasks = new Dictionary<string, State>();
-
-    public State GetNextState(State stateAwal, Trigger trigger)
+    public class StateTodo
     {
-        foreach (Transition perubahan in transisi)
+        public class Transition
         {
-            if (stateAwal == perubahan.StateAwal && trigger == perubahan.Trigger)
-            {
-                return perubahan.StateAkhir;
-            }
-        }
-        return stateAwal;
-    }
+            public State StateAwal;
+            public State StateAkhir;
+            public Trigger Trigger;
 
-    public void ActivateTrigger(Trigger trigger)
-    {
-        State newState = GetNextState(currentState, trigger);
-        Console.WriteLine("State Anda adalah: " + newState);
-
-             foreach (var ktm in tasks.ToList())
-        {
-            if (ktm.Value == currentState)
+            public Transition(State stateAwal, State stateAkhir, Trigger trigger)
             {
-                tasks[ktm.Key] = newState;
+                this.StateAwal = stateAwal;
+                this.StateAkhir = stateAkhir;
+                this.Trigger = trigger;
             }
         }
 
-        currentState = newState;
-    }
-    public void AddTaska(string task, State taskState)
-    {
-        tasks.Add(task, taskState);
-        Console.WriteLine("Tambah task: " + task + " (State: " + taskState + ")");
-    }
-
-    public void DisplayTasksa()
-    {
-        Console.WriteLine("Daftar task:");
-        foreach (var task in tasks)
+        Transition[] transisi =
         {
-            Console.WriteLine("- " + task.Key + " (State: " + task.Value + ")");
-        }
-    }
+            new Transition(State.Start, State.MembuatLaporan, Trigger.proses),
+            new Transition(State.MembuatLaporan, State.Ketemu, Trigger.cari),
+            new Transition(State.MembuatLaporan, State.Start, Trigger.cancel),
+            new Transition(State.MembuatLaporan, State.MengeditLaporan, Trigger.edit),
+            new Transition(State.MengeditLaporan, State.MembuatLaporan, Trigger.proses)
+        };
 
-    public void ChangeTaskState(string task, State newState)
-    {
-        if (tasks.ContainsKey(task))
+        public State currentState = State.Start;
+
+        public State GetNextState(State stateAwal, Trigger trigger)
         {
-            tasks[task] = newState;
-            Console.WriteLine("ktm   '" + task + "' berhasil diubah menjadi: " + newState);
-        }
-        else
-        {
-            Console.WriteLine("ktm '" + task + "' tidak ditemukan.");
-        }
-    }
-
-    public void Runa()
-    {
-        Console.WriteLine("Daftar trigger yang tersedia:");
-        foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
-        {
-            Console.WriteLine("- " + trigger);
-        }
-
-        Console.WriteLine();
-        Console.Write("Masukkan jumlah task yang ingin ditambahkan: ");
-        int jumlahTask = int.Parse(Console.ReadLine());
-        Debug.Assert(jumlahTask >= 0, "Jumlah task tidak boleh negatif");
-
-        for (int i = 0; i < jumlahTask; i++)
-        {
-            Console.Write("Masukkan nama task ke-" + (i + 1) + ": ");
-            string namaTask = Console.ReadLine();
-            AddTaska(namaTask, State.Start);
-        }
-
-        DisplayTasksa();
-
-        Console.Write("Masukkan nama task yang ingin diubah statusnya: ");
-        string taskYangDiubah = Console.ReadLine();
-
-        Console.WriteLine("Daftar trigger yang tersedia:");
-        foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
-        {
-            Console.WriteLine("- " + trigger);
-        }
-
-        Console.WriteLine();
-        Console.Write("Pilih trigger untuk task '" + taskYangDiubah + "': ");
-        string triggerInput = Console.ReadLine();
-
-        if (Enum.TryParse(triggerInput, out Trigger selectedTrigger))
-        {
-            ActivateTrigger(selectedTrigger);
-            DisplayTasksa(); // Perbarui tampilan setelah mengaktifkan trigger
-            // Periksa apakah tugas selesai (berada dalam status Ketemu), jika iya, panggil metode Bayar()
-            if (tasks.ContainsKey(taskYangDiubah) && tasks[taskYangDiubah] == State.Ketemu)
+            foreach (Transition perubahan in transisi)
             {
-                Console.WriteLine("Tugas selesai.");
-                Bayar();
+                if (stateAwal == perubahan.StateAwal && trigger == perubahan.Trigger)
+                {
+                    return perubahan.StateAkhir;
+                }
             }
-        }
-        else
-        {
-            Console.WriteLine("Trigger tidak valid.");
-        }
-    }
-
-    public void Bayar()
-    {
-        BankTransferConfig config = new BankTransferConfig();
-        Console.WriteLine("en/id:");
-
-        Console.WriteLine("bayar");
-        string Bahasa = Console.ReadLine();
-
-        string langPrompt = Bahasa == "en" ? "Please insert the amount of money to transfer:" : "Masukkan jumlah uang yang akan di-transfer:";
-        Console.WriteLine(langPrompt);
-        int amount = int.Parse(Console.ReadLine());
-
-        int totalAmount = amount;
-
-        string feeOutput = Bahasa == "en" ? "Transfer fee = " : "Biaya transfer = ";
-        string totalOutput = Bahasa == "en" ? "Total amount = " : "Total biaya = ";
-        Console.WriteLine($"{totalOutput} {totalAmount}");
-
-        string methodPrompt = Bahasa == "en" ? "Select transfer method:" : "Pilih metode transfer:";
-        Console.WriteLine(methodPrompt);
-        for (int i = 0; i < config.Methods.Length; i++)
-        {
-            Console.WriteLine($"{i + 1}. {config.Methods[i]}");
+            return stateAwal;
         }
 
-        Console.Write("Select transfer method number: ");
-        int selectedMethodIndex = int.Parse(Console.ReadLine());
-
-        Console.WriteLine($"Selected transfer method: {config.Methods[selectedMethodIndex - 1]}");
-
-        string confirmationPrompt = Bahasa == "en" ? $"Please type \"{config.Confirmation.En}\" to confirm the transaction:" : $"Ketik \"{config.Confirmation.Id}\" untuk mengkonfirmasi transaksi:";
-        Console.WriteLine(confirmationPrompt);
-        string confirmation = Console.ReadLine();
-
-        string successMessage = Bahasa == "en" ? "The transfer is completed" : "Proses transfer berhasil";
-        string failureMessage = Bahasa == "en" ? "Transfer is cancelled" : "Transfer dibatalkan";
-        if (confirmation == config.Confirmation.En || confirmation == config.Confirmation.Id)
+        public void ActivateTrigger(Trigger trigger)
         {
-            Console.WriteLine(successMessage);
+            State newState = GetNextState(currentState, trigger);
+            Console.WriteLine("State Anda adalah: " + newState);
+            currentState = newState;
         }
-        else
+
+        public void Runa()
         {
-            Console.WriteLine(failureMessage);
+            Console.WriteLine("Daftar trigger yang tersedia:");
+            foreach (Trigger trigger in Enum.GetValues(typeof(Trigger)))
+            {
+                Console.WriteLine("- " + trigger);
+            }
+
+            Console.WriteLine();
+            Console.Write("Pilih trigger untuk memulai: ");
+            string triggerInput = Console.ReadLine();
+
+            if (Enum.TryParse(triggerInput, out Trigger selectedTrigger))
+            {
+                ActivateTrigger(selectedTrigger);
+            }
+            else
+            {
+                Console.WriteLine("Trigger tidak valid.");
+            }
         }
     }
 }
